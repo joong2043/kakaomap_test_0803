@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Kakao 지도 시작하기</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <h1 class="text-3xl font-bold underline">Hello world!</h1>
+    <div id="map" style="width: 500px; height: 500px" class="mx-auto"></div>
+
+    <button
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      onclick="getCurrentPosBtn()"
+    >
+      Button
+    </button>
+    <script
+      type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0faeb3dc4793a50259747d85fd7d9a89"
+    ></script>
+
+    <script>
+      var container = document.getElementById("map");
+      var options = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667),
+        level: 3,
+      };
+
+      var map = new kakao.maps.Map(container, options);
+
+      function locationLoadSuccess(pos) {
+        var currentPos = new kakao.maps.LatLng(
+          pos.coords.latitude,
+          pos.coords.longitude
+        );
+
+        map.panTo(currentPos);
+
+        var marker = new kakao.maps.Marker({
+          position: currentPos,
+        });
+
+        marker.setMap(null);
+        marker.setMap(map);
+      }
+
+      function getCurrentPosBtn() {
+        navigator.geolocation.getCurrentPosition(locationLoadSuccess, null);
+      }
+    </script>
+  </body>
+</html>
