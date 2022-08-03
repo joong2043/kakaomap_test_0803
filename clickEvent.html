@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>클릭 이벤트</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div id="map" style="width: 500px; height: 500px"></div>
+    <p><em>지도를 클릭해주세요!</em></p>
+    <p id="result"></p>
+
+    <script
+      type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0faeb3dc4793a50259747d85fd7d9a89"
+    ></script>
+    <script>
+      var mapContainer = document.getElementById("map"), // 지도를 표시할 div
+        mapOption = {
+          center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+          level: 3, // 지도의 확대 레벨
+        };
+
+      var map = new kakao.maps.Map(mapContainer, mapOption);
+
+      kakao.maps.event.addListener(map, "click", function (mouseEvent) {
+        var latlng = mouseEvent.latLng;
+
+        var resultDiv = document.getElementById("result");
+        resultDiv.innerHTML = "찾음";
+      });
+    </script>
+  </body>
+</html>
